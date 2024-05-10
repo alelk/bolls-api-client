@@ -1,10 +1,11 @@
 plugins {
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlin.serialization)
+  id("maven-publish")
 }
 
 group = "io.github.alelk.bolls-api-client"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.2-SNAPSHOT"
 
 repositories {
   mavenCentral()
@@ -26,4 +27,22 @@ dependencies {
 
 tasks.test {
   useJUnitPlatform()
+}
+
+publishing {
+  repositories {
+    maven {
+      name = "GitHubPackages"
+      url = uri("https://maven.pkg.github.com/alelk/bolls-api-client")
+      credentials {
+        username = project.findProperty("gpr.user") as? String? ?: System.getenv("USERNAME") ?: "alelk"
+        password = project.findProperty("gpr.key") as? String? ?: System.getenv("TOKEN")
+      }
+    }
+    publications {
+      register<MavenPublication>("gpr") {
+        from(components["java"])
+      }
+    }
+  }
 }

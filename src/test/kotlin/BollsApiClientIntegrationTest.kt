@@ -1,3 +1,5 @@
+package io.github.alelk.bolls_api_client
+
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.collections.shouldBeIn
 import io.kotest.matchers.collections.shouldHaveAtLeastSize
