@@ -1,4 +1,4 @@
-package model
+package io.github.alelk.bolls_api_client.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
