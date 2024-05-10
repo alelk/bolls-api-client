@@ -1,3 +1,6 @@
+package io.github.alelk.bolls_api_client
+
+import io.github.alelk.bolls_api_client.model.*
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -8,7 +11,6 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.Serializable
-import model.*
 import java.net.URI
 import java.net.URL
 
