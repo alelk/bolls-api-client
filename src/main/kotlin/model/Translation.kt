@@ -1,8 +1,8 @@
-package model
+package io.github.alelk.bolls_api_client.model
 
+import io.github.alelk.bolls_api_client.model.serialization.LocalDateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import model.serialization.LocalDateTimeSerializer
 import java.time.LocalDateTime
 
 /**

@@ -1,4 +1,4 @@
-package model.serialization
+package io.github.alelk.bolls_api_client.model.serialization
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind

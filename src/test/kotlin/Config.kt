@@ -1,3 +1,5 @@
+package io.github.alelk.bolls_api_client
+
 import io.kotest.core.Tag
 import java.net.URI
 
