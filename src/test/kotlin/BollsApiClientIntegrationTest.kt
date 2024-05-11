@@ -11,7 +11,7 @@ class BollsApiClientIntegrationTest : FeatureSpec({
 
   tags(Config.Tags.integrationTest, Config.Tags.realBollsApi)
 
-  val client = BollsApiClient(Config.BOOLS_API_BASE_URL)
+  val client = BollsApiClient(BollsApiClientConfig(baseUrl = Config.BOOLS_API_BASE_URL))
 
   feature("get languages and translations") {
     scenario("get all translations") {

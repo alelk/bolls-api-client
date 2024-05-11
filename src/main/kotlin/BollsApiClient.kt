@@ -13,19 +13,36 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.Serializable
 import java.net.URI
 import java.net.URL
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
+
+enum class LogLevel { ALL, HEADERS, BODY, INFO, NONE }
+
+data class BollsApiClientConfig(
+  val baseUrl: URL = URI("https://bolls.life/").toURL(),
+  val connectTimeout: Duration = 10.seconds,
+  val requestTimeout: Duration = 20.seconds,
+  val socketTimeout: Duration = 20.seconds,
+  val logLevel: LogLevel = LogLevel.INFO
+)
 
 /** Bolls API http client.
  *
  * @param baseUrl Base url of the Bolls API.
  */
-class BollsApiClient(private val baseUrl: URL = URI("https://bolls.life/").toURL()) {
+class BollsApiClient(private val config: BollsApiClientConfig) {
   private val httpClient = HttpClient(CIO) {
-    defaultRequest { url(baseUrl.toString()) }
+    defaultRequest { url(config.baseUrl.toString()) }
     install(ContentNegotiation) {
       json()
     }
     install(Logging) {
-      level = LogLevel.INFO
+      level = io.ktor.client.plugins.logging.LogLevel.valueOf(config.logLevel.name)
+    }
+    install(HttpTimeout) {
+      requestTimeoutMillis = config.requestTimeout.inWholeMilliseconds
+      connectTimeoutMillis = config.connectTimeout.inWholeMilliseconds
+      socketTimeoutMillis = config.socketTimeout.inWholeMilliseconds
     }
   }
 
